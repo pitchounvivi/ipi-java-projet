@@ -21,7 +21,6 @@ public class Artist {
     @JsonIgnoreProperties("artist")
     private Set<Album> albums;
 
-
     public Long getArtistId() {
         return ArtistId;
     }
@@ -36,5 +35,13 @@ public class Artist {
 
     public void setName(String name) {
         Name = name;
+    }
+
+    public Set<Album> getAlbums() {
+        return albums;
+    }
+
+    public void setAlbums(Set<Album> albums) {
+        this.albums = albums;
     }
 }
