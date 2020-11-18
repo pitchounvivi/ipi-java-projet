@@ -1,2 +1,12 @@
-package com.myaudiolibrary.web;public class MyRunner {
+package com.myaudiolibrary.web;
+
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.stereotype.Component;
+
+@Component
+public class MyRunner implements CommandLineRunner {
+    @Override
+    public void run(String... args) throws Exception {
+
+    }
 }
