@@ -7,23 +7,22 @@ import javax.persistence.*;
 public class Album {
 
     @Id
-    @JoinColumn(name = "AlbumId", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long AlbumId;
+    private Integer AlbumId;
 
-    @Column
+    @Column(name = "Title")
     private String Title;
 
-    @ManyToOne
-    @JoinColumn(name = "ArtistId", nullable = false)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "ArtistId")
     private Artist artist;
 
 
-    public Long getAlbumId() {
+    public Integer getAlbumId() {
         return AlbumId;
     }
 
-    public void setAlbumId(Long albumId) {
+    public void setAlbumId(Integer albumId) {
         AlbumId = albumId;
     }
 
