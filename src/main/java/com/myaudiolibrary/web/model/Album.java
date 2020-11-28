@@ -8,10 +8,10 @@ public class Album {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer AlbumId;
+    private Integer albumId;
 
     @Column(name = "Title")
-    private String Title;
+    private String title;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "ArtistId")
@@ -19,19 +19,19 @@ public class Album {
 
 
     public Integer getAlbumId() {
-        return AlbumId;
+        return albumId;
     }
 
     public void setAlbumId(Integer albumId) {
-        AlbumId = albumId;
+        this.albumId = albumId;
     }
 
     public String getTitle() {
-        return Title;
+        return title;
     }
 
     public void setTitle(String title) {
-        Title = title;
+        this.title = title;
     }
 
     public Artist getArtist() {

@@ -12,10 +12,10 @@ public class Artist {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer ArtistId;
+    private Integer artistId;
 
     @Column(name = "Name")
-    private String Name;
+    private String name;
 
     @OneToMany(mappedBy = "artist",fetch = FetchType.EAGER)
     @JsonIgnoreProperties("artist")
@@ -23,19 +23,19 @@ public class Artist {
 
 
     public Integer getArtistId() {
-        return ArtistId;
+        return artistId;
     }
 
     public void setArtistId(Integer artistId) {
-        ArtistId = artistId;
+        this.artistId = artistId;
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void setName(String name) {
-        Name = name;
+        this.name = name;
     }
 
     public Set<Album> getAlbums() {
