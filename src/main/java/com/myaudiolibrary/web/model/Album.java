@@ -9,7 +9,7 @@ public class Album {
     @Id
     @Column(name = "AlbumId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer albumId;
+    private Integer id;
 
     @Column(name = "Title")
     private String title;
@@ -19,13 +19,14 @@ public class Album {
     private Artist artist;
 
 
-    public Integer getAlbumId() {
-        return albumId;
+    public Integer getId() {
+        return id;
     }
 
-    public void setAlbumId(Integer albumId) {
-        this.albumId = albumId;
+    public void setId(Integer id) {
+        this.id = id;
     }
+
 
     public String getTitle() {
         return title;

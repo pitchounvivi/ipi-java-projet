@@ -13,7 +13,7 @@ public class Artist {
     @Id
     @Column(name = "ArtistId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer artistId;
+    private Integer id;
 
     @Column(name = "Name")
     private String name;
@@ -23,12 +23,12 @@ public class Artist {
     private Set<Album> albums = new HashSet<>();
 
 
-    public Integer getArtistId() {
-        return artistId;
+    public Integer getId() {
+        return id;
     }
 
-    public void setArtistId(Integer artistId) {
-        this.artistId = artistId;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getName() {

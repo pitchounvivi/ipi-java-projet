@@ -21,9 +21,7 @@ public class ArtistController {
     public Artist findById(
             @PathVariable(value = "id") Integer id
     ){
-        Artist unArtist = artistRepository.findByArtistId(id);
-
-        return unArtist;
+        return artistRepository.findById(id).get();
     }
 
 }
