@@ -46,4 +46,13 @@ public class Artist {
     public void setAlbums(Set<Album> albums) {
         this.albums = albums;
     }
+
+    @Override
+    public String toString() {
+        return "Artist{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", albums=" + albums +
+                '}';
+    }
 }
