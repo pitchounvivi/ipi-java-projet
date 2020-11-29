@@ -43,7 +43,7 @@ public class ArtistController {
     }
 
 
-    //Recherche d'un artist par son nom
+    //Recherche d'un artiste par son nom
 
 
 
@@ -68,7 +68,7 @@ public class ArtistController {
     }
 
 
-    //Création d'un artist
+    //Création d'un artiste
     @RequestMapping(
             method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE,
@@ -86,7 +86,7 @@ public class ArtistController {
     }
 
 
-    //Modification d'un artist
+    //Modification d'un artiste
     @RequestMapping(
             value = "/{id}",
             method = RequestMethod.PUT,
@@ -105,5 +105,21 @@ public class ArtistController {
         return artistRepository.save(artist);
     }
 
+
+    //Suppression d'un artiste
+    @RequestMapping(
+            value = "/{id}",
+            method = RequestMethod.DELETE
+    )
+    @ResponseStatus(value = HttpStatus.NO_CONTENT)
+    public void deleteArtist(
+            @PathVariable (value = "id") Integer id
+    ){
+        if (!artistRepository.existsById(id)){
+            throw new EntityNotFoundException("L'artiste numéro " + id + " non trouvé");
+        }
+
+        artistRepository.deleteById(id);
+    }
 
 }
