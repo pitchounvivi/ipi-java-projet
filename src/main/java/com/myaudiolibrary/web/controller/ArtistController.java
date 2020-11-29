@@ -106,7 +106,7 @@ public class ArtistController {
             @RequestBody Artist artist
     ){
         if (artistRepository.findByName(artist.getName()) != null){
-            throw new EntityExistsException("L'artist " + artist.getName() + " n'est pas.");
+            throw new EntityExistsException("L'artist " + artist.getName() + " existe déjà.");
         }
 
         return artistRepository.save(artist);
