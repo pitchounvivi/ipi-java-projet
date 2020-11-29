@@ -18,7 +18,7 @@ public class Artist {
     @Column(name = "Name")
     private String name;
 
-    @OneToMany(mappedBy = "artist",fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "artist",fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JsonIgnoreProperties("artist")
     private Set<Album> albums = new HashSet<>();
 
