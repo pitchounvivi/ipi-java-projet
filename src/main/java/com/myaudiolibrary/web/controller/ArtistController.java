@@ -5,6 +5,7 @@ import com.myaudiolibrary.web.repository.ArtistRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -43,10 +44,24 @@ public class ArtistController {
     }
 
 
-    //Recherche d'un artiste par son nom
-
-
-
+    //Recherche d'un ou des artistes dans la bdd par son nom
+    @RequestMapping(
+            params = {"name","page","size","sortProperty","sortDirection"},
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    @ResponseStatus(HttpStatus.OK)
+    public Page<Artist> searchByName(
+            @RequestParam(value = "name") String nameSearch,
+            @RequestParam(defaultValue = "0") Integer page,
+            @RequestParam(defaultValue = "10") Integer size,
+            @RequestParam(defaultValue = "name") String sortProperty,
+            @RequestParam(value = "sortDirection", defaultValue = "ASC") String sortDirection
+    ){
+        Pageable pageRequest = PageRequest.of(page, size, Sort.Direction.fromString(sortDirection), sortProperty);
+        Page<Artist> artistsByName = artistRepository.findByNameContainsIgnoreCase(nameSearch, pageRequest);
+        return artistsByName;
+    }
 
 
     //Pagination liste de tous les artistes
@@ -66,6 +81,7 @@ public class ArtistController {
                 Sort.Direction.fromString(sortDirection), sortProperty));
         return listPageArtists;
     }
+
 
 
     //Création d'un artiste
