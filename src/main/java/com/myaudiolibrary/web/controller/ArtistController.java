@@ -79,6 +79,16 @@ public class ArtistController {
             @RequestParam(defaultValue = "name") String sortProperty,
             @RequestParam(value = "sortDirection", defaultValue = "ASC") String sortDirection
     ){
+        if (page<0){
+            throw new IllegalArgumentException("la page doit être positif ou null");//erreur 400
+        }
+        if (size<=0 || size>=50){
+            throw new IllegalArgumentException("la taille doit être compris entre 0 et 50");//erreur 400
+        }
+        if (!"ASC".equalsIgnoreCase(sortDirection) && !"DESC".equalsIgnoreCase(sortDirection)){
+            throw new IllegalArgumentException("Le paramètre sortDirection doit être ASC ou DESC");
+        }
+
         Page<Artist> listPageArtists = artistRepository.findAll(PageRequest.of(page, size,
                 Sort.Direction.fromString(sortDirection), sortProperty));
         return listPageArtists;
