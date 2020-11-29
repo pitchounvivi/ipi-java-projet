@@ -45,6 +45,8 @@ public class ArtistController {
 
 
     //Recherche d'un ou des artistes dans la bdd par son nom
+    //- pour utiliser avec le site web du prof utiliser => params = {"name","page","size","sortProperty","sortDirection"},
+    //- pour utiliser avec seulement le http://localhost:5366/artists?name= => params = {"name"},
     @RequestMapping(
             params = {"name","page","size","sortProperty","sortDirection"},
             method = RequestMethod.GET,
@@ -81,7 +83,6 @@ public class ArtistController {
                 Sort.Direction.fromString(sortDirection), sortProperty));
         return listPageArtists;
     }
-
 
 
     //Création d'un artiste
