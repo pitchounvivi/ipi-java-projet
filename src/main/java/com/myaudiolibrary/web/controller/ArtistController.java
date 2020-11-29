@@ -86,6 +86,24 @@ public class ArtistController {
     }
 
 
+    //Modification d'un artist
+    @RequestMapping(
+            value = "/{id}",
+            method = RequestMethod.PUT,
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    @ResponseStatus(value = HttpStatus.ACCEPTED)
+    public Artist modifyArtist(
+            @PathVariable (value = "id") Integer id,
+            @RequestBody Artist artist
+    ){
+        if (!artistRepository.existsById(id)){
+            throw new EntityNotFoundException("L'artiste numéro " + id + " non trouvé");
+        }
+
+        return artistRepository.save(artist);
+    }
 
 
 }
