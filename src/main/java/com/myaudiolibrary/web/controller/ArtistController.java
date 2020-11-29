@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.EntityExistsException;
 import javax.persistence.EntityNotFoundException;
 import java.util.Optional;
 
@@ -20,6 +21,7 @@ public class ArtistController {
 
     @Autowired
     private ArtistRepository artistRepository;
+
 
     //Recherche d'un artiste par son id
     @RequestMapping(
@@ -41,6 +43,10 @@ public class ArtistController {
     }
 
 
+    //Recherche d'un artist par son nom
+
+
+
 
 
     //Pagination liste de tous les artistes
@@ -60,6 +66,26 @@ public class ArtistController {
                 Sort.Direction.fromString(sortDirection), sortProperty));
         return listPageArtists;
     }
+
+
+    //Création d'un artist
+    @RequestMapping(
+            method = RequestMethod.POST,
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    @ResponseStatus(value = HttpStatus.CREATED)
+    public Artist createArtist(
+            @RequestBody Artist artist
+    ){
+        if (artistRepository.findByName(artist.getName()) != null){
+            throw new EntityExistsException("L'artist " + artist.getName() + " n'est pas.");
+        }
+
+        return artistRepository.save(artist);
+    }
+
+
 
 
 }
