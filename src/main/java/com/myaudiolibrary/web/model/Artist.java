@@ -18,7 +18,7 @@ public class Artist {
     @Column(name = "Name")
     private String name;
 
-    @OneToMany(mappedBy = "artist",fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "artist",fetch = FetchType.EAGER, cascade = CascadeType.REMOVE) // on peut aussi utiliser à la place de la cascade=>orphanRemoval = true
     @JsonIgnoreProperties("artist")
     private Set<Album> albums = new HashSet<>();
 
