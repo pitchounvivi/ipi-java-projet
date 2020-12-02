@@ -18,6 +18,7 @@ public class DetailController {
     @Autowired
     private ArtistRepository artistRepository;
 
+    //Affichage d'un artist
     @RequestMapping(
             value = "/{id}",
             method = RequestMethod.GET
@@ -31,6 +32,12 @@ public class DetailController {
         model.put("artist", artistOptional.get());
         return "detailArtist";
     }
+
+
+
+
+
+
 
 
 }
