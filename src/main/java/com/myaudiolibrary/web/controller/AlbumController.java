@@ -32,8 +32,17 @@ public class AlbumController {
             throw new EntityExistsException("L'album : " + album.getTitle() + " existe déjà.");
         }
 
-        //if(album.getTitle().isEmpty(){throw new EntityNotFoundException("L'album ne possède pas de titre");}
+        //Album dont le nom existe déjà, toutefois il faut rafraichir la page pour voir que l'enregistrement n'a pas été pris en compte (le problème serait réglé avec une redirection Thymeleaf)
+        //Cette vérification évite le duplicage d'album en base
+        if (albumRepository.findByTitle(album.getTitle()) != null){
+            throw new EntityExistsException("L'album " + album.getTitle() + " existe déjà. Enregistrement non pris en compte. Rafraichissez la page.");
+        }
 
+        //Vérifie la présence d'un titre
+        //Mais même problème que précédemment, il faut rafraichir la page
+        if(album.getTitle() == null){
+            throw new IllegalArgumentException("L'Album ne possède pas de titre. Enregistrement non pris en compte. Rafraichissez la page.");
+        }
 
         return albumRepository.save(album);
     }

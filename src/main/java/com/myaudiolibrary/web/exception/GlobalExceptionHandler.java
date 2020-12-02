@@ -33,4 +33,12 @@ public class GlobalExceptionHandler {
     }
 
 
+    @ExceptionHandler(NumberFormatException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public String handleNumberFormatException(IllegalArgumentException e)
+    {
+        return e.getMessage();
+    }
+
+
 }
