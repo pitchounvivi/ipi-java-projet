@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<<head th:replace="fragments/header :: head">
 
-</head>
+<head th:replace="fragments/header :: head">
+
 <body>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
 
-  <div th:replace="fragments/header :: menu"></div>
+<!--/*@thymesVar id="artist" type="com.myaudiolibrary.web.model.Artist"*/-->
 
+<div th:replace="fragments/header :: menu"></div>
 
   <div class="container">
     <div class="row">
@@ -24,46 +25,10 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th scope="row">A Cor Do Som</th>
-              <td><a href="#">Détail</a></td>
-            </tr>
-            <tr>
-              <th scope="row">Aaron Copland &amp; London Symphony Orchestra</th>
-              <td><a href="#">Détail</a></td>
-            </tr>
-            <tr>
-              <th scope="row">Aaron Goldberg</th>
-              <td><a href="#">Détail</a></td>
-            </tr>
-            <tr>
-              <th scope="row">AC/DC</th>
-              <td><a href="#">Détail</a></td>
-            </tr>
-            <tr>
-              <th scope="row">Academy of St. Martin in the Fields &amp; Sir Neville Marriner</th>
-              <td><a href="#" class="btn btn-primary">Détail</a></td>
-            </tr>
-            <tr>
-              <th scope="row">Academy of St. Martin in the Fields Chamber Ensemble &amp; Sir Neville Marriner</th>
-              <td><a href="#" class="btn btn-primary">Détail</a></td>
-            </tr>
-            <tr>
-              <th scope="row">Academy of St. Martin in the Fields, John Birch, Sir Neville Marriner &amp; Sylvia McNair</th>
-              <td><a href="#" class="btn btn-primary">Détail</a></td>
-            </tr>
-            <tr>
-              <th scope="row">Academy of St. Martin in the Fields, Sir Neville Marriner &amp; Thurston Dart</th>
-              <td><a href="#" class="btn btn-primary">Détail</a></td>
-            </tr>
-            <tr>
-              <th scope="row">Academy of St. Martin in the Fields, Sir Neville Marriner &amp; William Bennett</th>
-              <td><a href="#" class="btn btn-primary">Détail</a></td>
-            </tr>
-            <tr>
-              <th scope="row">Accept</th>
-              <td><a href="#" class="btn btn-primary">Détail</a></td>
-            </tr>
+          <tr th:each="artist : ${artists}">
+            <th scope="row" th:text="${artist.name}">A Cor Do Som</th>
+            <td><a th:href="'/artists/' + ${artist.id}">Détail</a></td>
+          </tr>
           </tbody>
         </table>
         <div class="row">
@@ -76,8 +41,7 @@
               </li>
               <li><a href="#">Page 1</a></li>
               <li class="">
-                <a href="#">              »
-                </a>          
+                <a href="#">»</a>
               </li>
             </ul></div>
           </div>
@@ -125,5 +89,5 @@
         </div>
       </div>
     </div>
-
+  </div>
 </body></html>
