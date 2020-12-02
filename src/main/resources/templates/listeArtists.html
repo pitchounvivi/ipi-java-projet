@@ -32,7 +32,9 @@
           </tbody>
         </table>
         <div class="row">
-          <div class="col-lg-6"><p>Affichage des artistes 1 à 10 sur un total de 275</p>
+          <div class="col-lg-6"><p>
+            Affichage des artistes <span th:text="${start}">1</span> à <span th:text="${end}">10</span> sur un total de <span th:text="${artists.totalElements}"></span>
+          </p>
           </div>
           <div class="col-lg-6">
             <ul class="pagination">

@@ -56,6 +56,13 @@ public class DetailController {
         //gérer 404
 
         model.put("artists", pageArtists);
+
+        //Affichage du numéro des éléments présents dans la page
+        model.put("start", page * size +1);
+        model.put("end", (page) * size + pageArtists.getNumberOfElements());
+
+        
+
         return "listeArtists";
     }
 
