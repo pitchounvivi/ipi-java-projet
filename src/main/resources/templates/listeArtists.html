@@ -21,10 +21,10 @@
               <th scope="col">Nom
                 <span th:switch="${param.sortDirection.toString()}">
                   <span th:case="ASC">
-                    <a th:href="'http://localhost:5366/artists?page=0&amp;size=10&amp;sortDirection=DESC&amp;sortProperty=name'"><span class="glyphicon glyphicon-chevron-up"></span></a>
+                    <a th:href="'http://localhost:5366/artists?page='+${pageNumber}+'&amp;size=10&amp;sortDirection=DESC&amp;sortProperty=name'"><span class="glyphicon glyphicon-chevron-up"></span></a>
                   </span>
                   <span th:case="DESC">
-                    <a th:href="'http://localhost:5366/artists?page=0&amp;size=10&amp;sortDirection=ASC&amp;sortProperty=name'"><span class="glyphicon glyphicon-chevron-down"></span></a>
+                    <a th:href="'http://localhost:5366/artists?page='+${pageNumber}+'&amp;size=10&amp;sortDirection=ASC&amp;sortProperty=name'"><span class="glyphicon glyphicon-chevron-down"></span></a>
                   </span>
                 </span>
               </th>
