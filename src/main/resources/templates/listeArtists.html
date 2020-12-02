@@ -39,13 +39,13 @@
           <div class="col-lg-6">
             <ul class="pagination">
               <li class="page-item" th:if="${artists.hasPrevious()}">
-                <a href="#">«</a>          
+                <a th:href="@{/artists(page=${previousPage},size=${param.size},sortDirection=${param.sortDirection},sortProperty=${param.sortProperty})}" class="page-link">«</a>
               </li>
               <li>
                 <a class="page-link">Page <span th:text="${pageNumber}"></span></a>
               </li>
               <li class="page-item"  th:if="${artists.hasNext()}">
-                <a href="#">»</a>
+                <a th:href="@{/artists(page=${nextPage},size=${param.size},sortDirection=${param.sortDirection},sortProperty=${param.sortProperty})}" class="page-link">»</a>
               </li>
             </ul></div>
           </div>
