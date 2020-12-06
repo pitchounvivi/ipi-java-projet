@@ -46,7 +46,7 @@ public class DetailController {
             method = RequestMethod.GET)
     public String searchByName(
             final ModelMap model,
-            @RequestParam(value = "name", required = true) String nameSearch,
+            @RequestParam(value = "name") String nameSearch,
             @RequestParam(defaultValue = "0") Integer page,
             @RequestParam(defaultValue = "10") Integer size,
             @RequestParam(defaultValue = "name") String sortProperty,
