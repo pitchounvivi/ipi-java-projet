@@ -85,7 +85,7 @@ public class DetailController {
             final ModelMap model,
             @RequestParam(defaultValue = "0") Integer page,
             @RequestParam(defaultValue = "10") Integer size,
-            @RequestParam(defaultValue = "matricule") String sortProperty,
+            @RequestParam(defaultValue = "name") String sortProperty,
             @RequestParam(value = "sortDirection", defaultValue = "ASC") String sortDirection
     ){
         Page<Artist> pageArtists = artistRepository.findAll(PageRequest.of(page, size,
@@ -134,8 +134,22 @@ public class DetailController {
             Artist artist
     ){
         artist = artistRepository.save(artist);
-
         return new RedirectView("/artists/" + artist.getId());
     }
+
+
+    //Suppression d'un artist
+    @RequestMapping(
+            value = "/{id}/delete",
+            method = RequestMethod.GET
+    )
+    public RedirectView deleteArtist(
+            @PathVariable Integer id
+    ){
+        artistRepository.deleteById(id);
+        return new RedirectView("/artists?page=0&size=10&sortProperty=name&sortDirection=ASC");
+    }
+
+
 
 }
