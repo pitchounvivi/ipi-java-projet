@@ -111,14 +111,14 @@ public class DetailController {
     /////////////////////////Zone de gestion : création, modification, suppression
     //Accéder au formulaire pour créer un artiste
     @RequestMapping(
-            value = "/new",
+            value = "new",
             method = RequestMethod.GET
     )
     public String newArtist(
-
+            final ModelMap model
     ){
-
-        return "detailArtist";
+        model.put("artist", new Artist());
+        return ("detailArtist");
     }
 
 
