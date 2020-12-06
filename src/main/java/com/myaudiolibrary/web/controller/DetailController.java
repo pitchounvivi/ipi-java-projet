@@ -108,6 +108,18 @@ public class DetailController {
 
 
 
+    /////////////////////////Zone de gestion : création, modification, suppression
+    //Accéder au formulaire pour créer un artiste
+    @RequestMapping(
+            value = "/new",
+            method = RequestMethod.GET
+    )
+    public String newArtist(
+
+    ){
+
+        return "detailArtist";
+    }
 
 
 }
