@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.view.RedirectView;
 
+import java.awt.*;
 import java.util.Optional;
 
 @Controller
@@ -111,7 +113,7 @@ public class DetailController {
     /////////////////////////Zone de gestion : création, modification, suppression
     //Accéder au formulaire pour créer un artiste
     @RequestMapping(
-            value = "new",
+            value = "/new",
             method = RequestMethod.GET
     )
     public String newArtist(
@@ -121,5 +123,19 @@ public class DetailController {
         return ("detailArtist");
     }
 
+
+    //Création d'un nouvel artiste
+    @RequestMapping(
+            value = "/{id}",
+            method = RequestMethod.POST,
+            consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE
+    )
+    public RedirectView createOrSaveArtist(
+            Artist artist
+    ){
+        artist = artistRepository.save(artist);
+
+        return new RedirectView("/artists/" + artist.getId());
+    }
 
 }
