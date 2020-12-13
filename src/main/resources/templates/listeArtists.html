@@ -33,7 +33,7 @@
                       <a th:href="@{/artists(name=${param.name},page=0,size=10,sortDirection=ASC)}"><span class="glyphicon glyphicon-chevron-down"></span></a>
                     </span>
                     <span th:unless="${param.name}">
-                      <a th:href="@{/artists(page=0,size=10,sortDirection=DESC,sortProperty=name)}"><span class="glyphicon glyphicon-chevron-up"></span></a>
+                      <a th:href="@{/artists(page=0,size=10,sortDirection=ASC,sortProperty=name)}"><span class="glyphicon glyphicon-chevron-down"></span></a>
                   </span>
                 </span>
               </th>
