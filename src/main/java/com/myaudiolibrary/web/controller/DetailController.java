@@ -70,6 +70,12 @@ public class DetailController {
         model.put("previousPage", page-1);
         model.put("nextPage", page+1);
 
+
+        model.put("size", size);
+        model.put("sortProperty", sortProperty);
+        model.put("sortDirection", sortDirection);
+
+
         return "listeArtists";
     }
 
@@ -100,9 +106,17 @@ public class DetailController {
         model.put("end", (page) * size + pageArtists.getNumberOfElements());
 
         //Les boutons et l'affichage de la page en cours
-        model.put("pageNumber", page);//C'est pour afficher la page en cours
+        model.put("pageNumber", page +1);//C'est pour afficher la page en cours (plus 1 pour pas afficher 0)
         model.put("previousPage", page-1);
         model.put("nextPage", page+1);
+
+
+
+        model.put("size", size);
+        model.put("sortProperty", sortProperty);
+        model.put("sortDirection", sortDirection);
+
+
 
         return "listeArtists";
     }
@@ -124,7 +138,7 @@ public class DetailController {
     }
 
 
-    //Création d'un nouvel artiste
+    //Création et mise à jour d'un nouvel artiste
     @RequestMapping(
             value = "/{id}",
             method = RequestMethod.POST,
