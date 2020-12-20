@@ -172,41 +172,6 @@ public class DetailController {
     }
 
 
-    /*//Création d'un nouvel album
-    @RequestMapping(
-            value = "/{id}/newAlbum",
-            method = RequestMethod.GET
-    )
-    public RedirectView newAlbum(
-            Album album,
-            @PathVariable Integer id
-    ){
-        Album albumToArtist = new Album();
-        albumToArtist.setArtist(artistRepository.getOne(id));
-        albumToArtist.setTitle(album.toString());
-        albumRepository.save(albumToArtist);
-        return new RedirectView("/artists/" + id);
-    }*/
-
-
-    /*//Création d'un nouvel album
-    @RequestMapping(
-            value = "/albums",
-            method = RequestMethod.POST,
-            consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE
-    )
-    public RedirectView newAlbum(
-            Album album,
-            @PathVariable Integer id
-    ){
-        Album albumToArtist = new Album();
-        albumToArtist.setArtist(artistRepository.getOne(id));
-        albumToArtist.setTitle(album.toString());
-        albumRepository.save(albumToArtist);
-        return new RedirectView("/artists/" + id);
-    }*/
-
-
     //Création d'un nouvel album
     @RequestMapping(
             value = "/{id}/albums",
@@ -223,4 +188,8 @@ public class DetailController {
         albumRepository.save(albumToArtist);
         return new RedirectView("/artists/" + id);
     }
+
+
+
+
 }
