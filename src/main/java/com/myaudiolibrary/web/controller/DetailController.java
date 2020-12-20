@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.persistence.EntityNotFoundException;
-import java.awt.*;
 import java.util.Optional;
 
 @Controller
@@ -43,7 +42,6 @@ public class DetailController {
     ){
         Optional<Artist> artistOptional = artistRepository.findById(id);
 
-        //pour plus tard gestion erreur 404
         if(artistOptional.isEmpty()){
             throw new EntityNotFoundException("L'artiste d'identifiant " + id + " n'a pas été trouvé !");
         }
@@ -69,6 +67,9 @@ public class DetailController {
         Page<Artist> artistsByName = artistRepository.findByNameContainsIgnoreCase(nameSearch, pageRequest);
 
         //gérer 404
+        if (artistsByName.isEmpty()){
+            throw new EntityNotFoundException("L'artiste de nom " + nameSearch + " n'existe pas !");
+        }
 
         model.put("artists", artistsByName);
 
