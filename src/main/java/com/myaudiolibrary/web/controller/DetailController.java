@@ -190,6 +190,17 @@ public class DetailController {
     }
 
 
-
+    //Suppression d'un album
+    @RequestMapping(
+            value = "/{id}/albums/{idAlbum}/delete",
+            method = RequestMethod.GET
+    )
+    public RedirectView deleteAlbum(
+            @PathVariable Integer id,
+            @PathVariable Integer idAlbum
+    ){
+        albumRepository.deleteById(idAlbum);
+        return new RedirectView("/artists/" + id);
+    }
 
 }

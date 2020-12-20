@@ -46,7 +46,7 @@
 						</div>
 						<div class="col-lg-2 text-center">
 							<div class="list-group text-center">
-								<button class="btn-danger list-group-item list-group-item-action" ><span class="glyphicon glyphicon-remove"></span></button>
+								<a th:href="'/artists/'+${artist.id}+'/albums/'+${album.id}+'/delete'" class="btn btn-danger" >Supprimer</a>
 							</div>
 						</div>
 					</div>
