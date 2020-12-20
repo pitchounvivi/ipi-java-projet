@@ -30,8 +30,8 @@
 
 
 			<div class="row form-group">
-				<input form="artistForm" class="btn btn-primary" type="submit" value="Enregistrer">
-				<a th:href="'/artists/'+${artist.id}+'/delete'" class="btn btn-danger" >Supprimer</a>
+				<input form="artistForm" class="btn btn-danger" type="submit" value="Enregistrer">
+				<a th:href="'/artists/'+${artist.id}+'/delete'" class="btn btn-primary" >Supprimer</a>
 			</div>
 
 
@@ -47,7 +47,7 @@
 						<div class="col-lg-3 text-center">
 							<div class="list-group text-center">
 								<input form="albumModifyForm" class="btn btn-secondary" type="submit" value="Modifier">
-								<a th:href="'/artists/'+${artist.id}+'/albums/'+${album.id}+'/delete'" class="btn btn-danger" >Supprimer</a>
+								<a th:href="'/artists/'+${artist.id}+'/albums/'+${album.id}+'/delete'" class="btn btn-primary" >Supprimer</a>
 							</div>
 						</div>
 					</form>
@@ -62,7 +62,7 @@
 						<input type="hidden" name="artistId" th:value="${artist.id}">
 					</div>
 					<div class="col-lg-2 text-center">
-						<input form="albumForm" class="btn btn-primary" type="submit" value="Enregistrer">
+						<input form="albumForm" class="btn btn-danger" type="submit" value="Enregistrer">
 					</div>
 				</div>
 			</form>
