@@ -112,7 +112,7 @@ public class DetailController {
         if (page<0){
             throw new IllegalArgumentException("la page doit être positif ou null");//erreur 400
         }
-        if (page>pageArtists.getTotalPages()){
+        if (page>(pageArtists.getTotalPages()-1)){
             throw new IllegalArgumentException("le numéro de la page doit être inférieur");//erreur 400
         }
         if (size<=0 || size>=50){
