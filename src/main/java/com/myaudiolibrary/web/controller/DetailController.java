@@ -203,4 +203,22 @@ public class DetailController {
         return new RedirectView("/artists/" + id);
     }
 
+
+    //Modifier d'un album
+    @RequestMapping(
+            value = "/{id}/albums/{idAlbum}/post",
+            method = RequestMethod.POST,
+            consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE
+    )
+    public RedirectView modifyAlbum(
+            Album album,
+            @PathVariable Integer id,
+            @PathVariable Integer idAlbum
+    ){
+        Optional<Album> albumToModify = albumRepository.findById(idAlbum);
+        albumToModify.get().setTitle(album.getTitle());
+        albumRepository.save(albumToModify.get());
+        return new RedirectView("/artists/" + id);
+    }
+
 }
