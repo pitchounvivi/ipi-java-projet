@@ -5,6 +5,8 @@
 </head>
 <body>
 
+    <div th:replace="fragments/header :: menu"></div>
+
     <div class="jumbotron">
         <h1>Erreur <span th:text="${status}"></span></h1>
         <p class="lead" th:text="${error}"></p>
