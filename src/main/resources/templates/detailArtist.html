@@ -55,15 +55,17 @@
 
 
 
-			<form id="albumForm" th:action="'/albums'" method="post" class="row">
-				<input type="hidden" th:value="${artist.id}" name="artistId">
+			<form id="albumForm" th:action="'/artists/'+${artist.id}+'/albums'" method="post" class="row">
+
 				<div class="row">
 					<div class="col-lg-10">
-						<input name="title" type="text" placeholder="Ajouter un album..." class="form-control ember-text-field ember-view">
+						<input type="text" name="title"  placeholder="Ajouter un album..." class="form-control ember-text-field ember-view">
+						<input type="hidden" name="artistId" th:value="${artist.id}">
 					</div>
 					<div class="col-lg-2 text-center">
 						<!--<a th:href="'/artists/'+${artist.id}+'/newAlbum'" class="btn-success list-group-item list-group-item-action"><span class="glyphicon glyphicon-plus"></span></a>-->
-						<a th:href="'/albums'" class="btn-success list-group-item list-group-item-action"><span class="glyphicon glyphicon-plus"></span></a>
+						<!--<a th:href="'/albums'" class="btn-success list-group-item list-group-item-action"><span class="glyphicon glyphicon-plus"></span></a>-->
+						<input form="albumForm" class="btn btn-primary" type="submit" value="Enregistrer">
 					</div>
 				</div>
 			</form>

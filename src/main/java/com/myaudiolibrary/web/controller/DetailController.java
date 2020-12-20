@@ -1,6 +1,8 @@
 package com.myaudiolibrary.web.controller;
 
+import com.myaudiolibrary.web.model.Album;
 import com.myaudiolibrary.web.model.Artist;
+import com.myaudiolibrary.web.repository.AlbumRepository;
 import com.myaudiolibrary.web.repository.ArtistRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -25,6 +27,9 @@ public class DetailController {
 
     @Autowired
     private ArtistRepository artistRepository;
+
+    @Autowired
+    private AlbumRepository albumRepository;
 
     //Affichage d'un artiste
     @RequestMapping(
@@ -66,7 +71,9 @@ public class DetailController {
         model.put("end", (page) * size + artistsByName.getNumberOfElements());
 
         //Les boutons et l'affichage de la page en cours
-        model.put("pageNumber", page);//C'est pour afficher la page en cours
+        model.put("pageNumber", page +1);//C'est pour afficher la page en cours
+        //->(plus 1 pour ne pas afficher 0, mais moi ça me perturbe d'avoir 0 dans l'url et d'avoir la page affichée indiquant 1)
+
         model.put("previousPage", page-1);
         model.put("nextPage", page+1);
 
@@ -165,5 +172,55 @@ public class DetailController {
     }
 
 
+    /*//Création d'un nouvel album
+    @RequestMapping(
+            value = "/{id}/newAlbum",
+            method = RequestMethod.GET
+    )
+    public RedirectView newAlbum(
+            Album album,
+            @PathVariable Integer id
+    ){
+        Album albumToArtist = new Album();
+        albumToArtist.setArtist(artistRepository.getOne(id));
+        albumToArtist.setTitle(album.toString());
+        albumRepository.save(albumToArtist);
+        return new RedirectView("/artists/" + id);
+    }*/
 
+
+    /*//Création d'un nouvel album
+    @RequestMapping(
+            value = "/albums",
+            method = RequestMethod.POST,
+            consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE
+    )
+    public RedirectView newAlbum(
+            Album album,
+            @PathVariable Integer id
+    ){
+        Album albumToArtist = new Album();
+        albumToArtist.setArtist(artistRepository.getOne(id));
+        albumToArtist.setTitle(album.toString());
+        albumRepository.save(albumToArtist);
+        return new RedirectView("/artists/" + id);
+    }*/
+
+
+    //Création d'un nouvel album
+    @RequestMapping(
+            value = "/{id}/albums",
+            method = RequestMethod.POST,
+            consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE
+    )
+    public RedirectView newAlbum(
+            Album album,
+            @PathVariable Integer id
+    ){
+        Album albumToArtist = new Album();
+        albumToArtist.setTitle(album.getTitle());
+        albumToArtist.setArtist(artistRepository.getOne(id));
+        albumRepository.save(albumToArtist);
+        return new RedirectView("/artists/" + id);
+    }
 }
