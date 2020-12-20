@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.view.RedirectView;
 
+import javax.persistence.EntityNotFoundException;
 import java.awt.*;
 import java.util.Optional;
 
@@ -41,6 +42,11 @@ public class DetailController {
             @PathVariable Integer id
     ){
         Optional<Artist> artistOptional = artistRepository.findById(id);
+
+        //pour plus tard gestion erreur 404
+        if(artistOptional.isEmpty()){
+            throw new EntityNotFoundException("L'artiste d'identifiant " + id + " n'a pas été trouvé !");
+        }
 
         model.put("artist", artistOptional.get());
         return "detailArtist";
