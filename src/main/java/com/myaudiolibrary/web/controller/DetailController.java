@@ -84,7 +84,7 @@ public class DetailController {
         model.put("previousPage", page-1);
         model.put("nextPage", page+1);
 
-
+        //Les paramètres pour l'affichage correct dans le cas d'une recherche par nom avec une grosse liste
         model.put("size", size);
         model.put("sortProperty", sortProperty);
         model.put("sortDirection", sortDirection);
@@ -92,9 +92,6 @@ public class DetailController {
 
         return "listeArtists";
     }
-
-
-
 
 
     //Liste des artistes
@@ -111,7 +108,23 @@ public class DetailController {
         Page<Artist> pageArtists = artistRepository.findAll(PageRequest.of(page, size,
                 Sort.Direction.fromString(sortDirection), sortProperty));
 
-        //gérer 404
+        //gestion des erreurs
+        if (page<0){
+            throw new IllegalArgumentException("la page doit être positif ou null");//erreur 400
+        }
+        if (page>pageArtists.getTotalPages()){
+            throw new IllegalArgumentException("le numéro de la page doit être inférieur");//erreur 400
+        }
+        if (size<=0 || size>=50){
+            throw new IllegalArgumentException("la taille doit être compris entre 0 et 50");//erreur 400
+        }
+        if (!"ASC".equalsIgnoreCase(sortDirection) && !"DESC".equalsIgnoreCase(sortDirection)){
+            throw new IllegalArgumentException("Le paramètre sortDirection doit être ASC ou DESC");
+        }
+        if (!sortProperty.equalsIgnoreCase("name")){
+            throw new IllegalArgumentException("Le propriété demandée n'est pas la bonne");//erreur 400
+        }
+
 
         model.put("artists", pageArtists);
 
@@ -124,13 +137,10 @@ public class DetailController {
         model.put("previousPage", page-1);
         model.put("nextPage", page+1);
 
-
-
+        //Les paramètres pour l'affichage correct dans le cas d'une recherche par nom avec une grosse liste
         model.put("size", size);
         model.put("sortProperty", sortProperty);
         model.put("sortDirection", sortDirection);
-
-
 
         return "listeArtists";
     }
