@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.view.RedirectView;
 
+import javax.persistence.EntityExistsException;
 import javax.persistence.EntityNotFoundException;
 import java.util.Optional;
 
@@ -171,6 +172,10 @@ public class DetailController {
     public RedirectView createOrSaveArtist(
             Artist artist
     ){
+        if (artistRepository.findByName(artist.getName()) != null){
+            throw new EntityExistsException("L'artist " + artist.getName() + " existe déjà !");
+        }
+
         artist = artistRepository.save(artist);
         return new RedirectView("/artists/" + artist.getId());
     }
