@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: head">
+
+</head>
+<body class="ember-application">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+
+
+<!--/*@thymesVar id="artist" type="com.myaudiolibrary.web.model.Artist"*/-->
+
+<div th:replace="fragments/header :: menu"></div>
+
+
+<div class="container">
+
+	<h2>Détail de l'artiste [[${artist.name}]]</h2>
+
+	<form id="artistForm" th:action="'/artists/' + ${artist.id}" method="post" class="row">
+		<input type="hidden" th:value="${artist.id}" name="id">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="form-group">
+					<label for="name" class="form-control-label">Nom</label>
+					<input type="text" id="name" name="name" th:value="${artist.name}" th:required="required" class="ember-text-field form-control ember-view">
+				</div>
+			</div>
+		</div>
+	</form>
+
+
+	<div class="row form-group">
+		<input form="artistForm" class="btn btn-danger" type="submit" value="Enregistrer">
+		<a th:href="'/artists/'+${artist.id}+'/delete'" class="btn btn-primary" >Supprimer</a>
+	</div>
+
+
+	<div class="row">
+		<label class="form-control-label">Albums</label>
+		<div class="row" th:each="album : ${artist.getAlbums()}">
+			<form th:id="'albumModifyForm'+${album.id}" th:action="'/artists/'+${artist.id}+'/albums/'+${album.id}+'/modify'" method="post">
+				<div class="col-lg-9" >
+					<div class="list-group">
+						<input type="text" name="title" class="form-control ember-text-field ember-view list-group-item" th:value="${album.getTitle()}">
+						<input type="hidden" th:value="${album.id}" name="idAlbum">
+					</div>
+				</div>
+				<div class="col-lg-3 text-center">
+					<div class="list-group text-center">
+						<input th:form="'albumModifyForm'+${album.id}" class="btn btn-secondary" type="submit" value="Modifier">
+						<a th:href="'/artists/'+${artist.id}+'/albums/'+${album.id}+'/delete'" class="btn btn-primary" >Supprimer</a>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<p th:text="${message}"></p>
+
+	<form id="albumForm" th:action="'/artists/'+${artist.id}+'/albums'" method="post" class="row">
+		<div class="row">
+			<div class="col-lg-10">
+				<input type="text" name="title"  placeholder="Ajouter un album..." th:required="required" class="form-control ember-text-field ember-view">
+				<input type="hidden" name="artistId" th:value="${artist.id}">
+			</div>
+			<div class="col-lg-2 text-center">
+				<input form="albumForm" class="btn btn-danger" type="submit" value="Enregistrer">
+			</div>
+		</div>
+	</form>
+
+</div>
+
+</body>
+</html>
