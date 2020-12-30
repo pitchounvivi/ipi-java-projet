@@ -228,7 +228,7 @@ public class DetailController {
 
     //Modifier d'un album
     @RequestMapping(
-            value = "/{id}/albums/{idAlbum}/post",
+            value = "/{id}/albums/{idAlbum}/modify",
             method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE
     )

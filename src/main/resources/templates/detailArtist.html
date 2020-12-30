@@ -38,15 +38,16 @@
 			<div class="row">
 				<label class="form-control-label">Albums</label>
 				<div class="row" th:each="album : ${artist.getAlbums()}">
-					<form id="albumModifyForm" th:action="'/artists/'+${artist.id}+'/albums/'+${album.id}+'/post'" method="post">
+					<form th:id="'albumModifyForm'+${album.id}" th:action="'/artists/'+${artist.id}+'/albums/'+${album.id}+'/modify'" method="post">
 						<div class="col-lg-9" >
 							<div class="list-group">
 								<input type="text" name="title" class="form-control ember-text-field ember-view list-group-item" th:value="${album.getTitle()}">
+								<input type="hidden" th:value="${album.id}" name="idAlbum">
 							</div>
 						</div>
 						<div class="col-lg-3 text-center">
 							<div class="list-group text-center">
-								<input form="albumModifyForm" class="btn btn-secondary" type="submit" value="Modifier">
+								<input th:form="'albumModifyForm'+${album.id}" class="btn btn-secondary" type="submit" value="Modifier">
 								<a th:href="'/artists/'+${artist.id}+'/albums/'+${album.id}+'/delete'" class="btn btn-primary" >Supprimer</a>
 							</div>
 						</div>
