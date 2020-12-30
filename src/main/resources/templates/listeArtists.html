@@ -21,24 +21,15 @@
               <th scope="col">Nom
                 <span th:switch="${sortDirection.toString()}">
                   <span th:case="ASC">
-                    <span th:if="${param.name}">
-                      <a th:href="@{/artists(name=${param.name},page=0,size=10,sortDirection=DESC)}"><span class="glyphicon glyphicon-chevron-up"></span></a>
-                    </span>
-                    <span th:unless="${param.name}">
-                      <a th:href="@{/artists(page=0,size=10,sortDirection=DESC,sortProperty=name)}"><span class="glyphicon glyphicon-chevron-up"></span></a>
-                    </span>
+                    <a th:if="${param.name}" th:href="@{/artists(name=${param.name},page=0,size=10,sortDirection=DESC)}"><span class="glyphicon glyphicon-chevron-up"></span></a>
+                    <a th:unless="${param.name}" th:href="@{/artists(page=0,size=10,sortDirection=DESC,sortProperty=name)}"><span class="glyphicon glyphicon-chevron-up"></span></a>
                   </span>
                   <span th:case="DESC">
-                    <span th:if="${param.name}">
-                      <a th:href="@{/artists(name=${param.name},page=0,size=10,sortDirection=ASC)}"><span class="glyphicon glyphicon-chevron-down"></span></a>
-                    </span>
-                    <span th:unless="${param.name}">
-                      <a th:href="@{/artists(page=0,size=10,sortDirection=ASC,sortProperty=name)}"><span class="glyphicon glyphicon-chevron-down"></span></a>
-                    </span>
+                    <a th:if="${param.name}" th:href="@{/artists(name=${param.name},page=0,size=10,sortDirection=ASC)}"><span class="glyphicon glyphicon-chevron-down"></span></a>
+                    <a th:unless="${param.name}" th:href="@{/artists(page=0,size=10,sortDirection=ASC,sortProperty=name)}"><span class="glyphicon glyphicon-chevron-down"></span></a>
                   </span>
                 </span>
               </th>
-              <th scope="col"></th>
             </tr>
           </thead>
           <tbody>
@@ -54,39 +45,24 @@
               Affichage des artistes <span th:text="${start}">1</span> à <span th:text="${end}">10</span> sur un total de <span th:text="${artists.totalElements}"></span>
             </p>
           </div>
-            <div class="col-lg-6">
-              <ul class="pagination">
-                <li class="page-item" th:if="${artists.hasPrevious()}">
+          <div class="col-lg-6">
+            <ul class="pagination">
+              <li class="page-item" th:if="${artists.hasPrevious()}">
+                <a th:if="${param.name}" th:href="@{/artists(name=${param.name},page=${previousPage},size=${param.size},sortDirection=${param.sortDirection})}" class="page-link">«</a>
+                <a th:unless="${param.name}" th:href="@{/artists(page=${previousPage},size=${param.size},sortDirection=${param.sortDirection},sortProperty=${param.sortProperty})}" class="page-link">«</a>
+              </li>
 
-                  <span th:if="${param.name}">
-                    <a th:href="@{/artists(name=${param.name},page=${previousPage},size=${param.size},sortDirection=${param.sortDirection})}" class="page-link">«</a>
-                  </span>
-                  <span th:unless="${param.name}">
-                    <a th:href="@{/artists(page=${previousPage},size=${param.size},sortDirection=${param.sortDirection},sortProperty=${param.sortProperty})}" class="page-link">«</a>
-                  </span>
+              <li>
+                <a class="page-link">Page <span th:text="${pageNumber}"></span></a>
+              </li>
 
-                </li>
-
-                <li>
-                  <a class="page-link">Page <span th:text="${pageNumber}"></span></a>
-                </li>
-
-                <li class="page-item"  th:if="${artists.hasNext()}">
-
-                  <span th:if="${param.name}">
-                    <a th:href="@{/artists(name=${param.name},page=${nextPage},size=${param.size},sortDirection=${param.sortDirection})}" class="page-link">»</a>
-                  </span>
-                  <span th:unless="${param.name}">
-                    <a th:href="@{/artists(page=${nextPage},size=${param.size},sortDirection=${param.sortDirection},sortProperty=${param.sortProperty})}" class="page-link">»</a>
-                  </span>
-
-                </li>
-
-              </ul>
-            </div>
+              <li class="page-item"  th:if="${artists.hasNext()}">
+                <a th:if="${param.name}" th:href="@{/artists(name=${param.name},page=${nextPage},size=${param.size},sortDirection=${param.sortDirection})}" class="page-link">»</a>
+                <a th:unless="${param.name}" th:href="@{/artists(page=${nextPage},size=${param.size},sortDirection=${param.sortDirection},sortProperty=${param.sortProperty})}" class="page-link">»</a>
+              </li>
+            </ul>
           </div>
         </div>
-
       </div>
     </div>
   </div>
