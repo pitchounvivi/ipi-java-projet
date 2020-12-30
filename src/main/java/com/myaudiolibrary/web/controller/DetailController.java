@@ -204,6 +204,10 @@ public class DetailController {
             Album album,
             @PathVariable Integer id
     ){
+        if (albumRepository.findByTitle(album.getTitle()) != null){
+            throw new EntityExistsException("L'album " + album.getTitle() + " existe déjà !");
+        }
+
         Album albumToArtist = new Album();
         albumToArtist.setTitle(album.getTitle());
         albumToArtist.setArtist(artistRepository.getOne(id));
