@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.persistence.EntityExistsException;
@@ -239,11 +240,17 @@ public class DetailController {
     public RedirectView modifyAlbum(
             Album album,
             @PathVariable Integer id,
-            @PathVariable Integer idAlbum
+            @PathVariable Integer idAlbum,
+            RedirectAttributes modif
     ){
         Optional<Album> albumToModify = albumRepository.findById(idAlbum);
         albumToModify.get().setTitle(album.getTitle());
         albumRepository.save(albumToModify.get());
+
+        //Pour avoir un petit message informant de l'enregistrement de la modification
+        // -> toutefois pour une gestion dynamique, je pense que du JS s'impose
+        modif.addFlashAttribute("message", "Modification effectuée");
+
         return new RedirectView("/artists/" + id);
     }
 
